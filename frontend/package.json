@@ -21,7 +21,7 @@
     "predeploy": "npm run build",
     "gitdeploy": "gh-pages -d build",
     "deploy": "npm run build && scp -r ./build/* ofirdahan1003@ofir1003.students.nomoredomainssbs.ru:/home/ofirdahan1003/frontend",
-    "push": "git add . && git commit -m \"Fix small issue about code convention\" && git push",
+    "push": "git add . && git commit -m \"Fix package json\" && git push",
     "fullpush": "npm run push && npm run deploy"
   },
   "eslintConfig": {

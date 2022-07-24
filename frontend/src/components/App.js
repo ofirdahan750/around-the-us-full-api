@@ -119,15 +119,16 @@ const App = () => {
   }, [location.pathname]);
   const onInit = () => {
     const jwt = localStorage.getItem("jwt") || false;
-    setCurrentUser(loadingInitState.useInfo);
-    setCards(loadingInitState.card);
     if (jwt) {
+      setCurrentUser(loadingInitState.useInfo);
+      setCards(loadingInitState.card);
       validateToken(jwt)
         .then((userRes) => {
+          navigate("/");
           setCurrentUser(userRes);
           setIsLoggedIn(true);
           setIsLoading(true);
-          navigate("/");
+          // debugger
           api
             .getInitialCards()
             .then((cardItemsArr) => {
@@ -364,6 +365,9 @@ const App = () => {
     authenticate({email, password})
       .then((user) => {
         localStorage.setItem("jwt", user.token);
+        api.setTokenHeader(user.token);
+        const userInfo = validateToken(user.token);
+        setCurrentUser(userInfo);
         onInit();
       })
       .catch((err) => {

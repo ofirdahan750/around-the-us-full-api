@@ -11,7 +11,7 @@ const { createUser, login } = require('./controllers/users');
 const { getUserAuthSchema } = require('./utils/validations');
 
 const app = express();
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 const { catchError, ErrorHandler } = require('./utils/error');
 const auth = require('./middlewares/auth');
 

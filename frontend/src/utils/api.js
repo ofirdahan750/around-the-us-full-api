@@ -1,13 +1,16 @@
 import apiConfing from "./config.js";
 class Api {
   constructor() {
-    this._headers = apiConfing.headers;
+    this._token = localStorage.getItem("jwt");
     this._baseUrl = apiConfing.baseUrl;
   }
   _onHttpRequest = async (url, method, data) => {
     const res = await fetch(`${this._baseUrl}/${url}`, {
       method,
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${this._token}`,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
     });
     if (res.ok) {
@@ -22,6 +25,11 @@ class Api {
   getInitialCards = () => {
     return this._onHttpRequest("cards", "GET");
   };
+
+  setTokenHeader = (token) => {
+    this._token = token;
+  };
+
   getInitInfo = () => {
     return Promise.all([this.getInitialCards(), this._getUserInfo()]);
   };
