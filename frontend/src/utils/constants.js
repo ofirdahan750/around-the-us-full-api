@@ -90,6 +90,13 @@ const formSettingStates = {
     btnSetting: {txt: "Sign up", isDisable: false},
     bottomLinkTxt: "Already a member? Log in here!"
   },
+  ALERT_POPUP_LOADING: {
+    name: "ALERT_POPUP_LOADING",
+    type: "alert",
+    imgSrc: spinnerGif,
+    alt: "Loading gif image",
+    title: "Please wait..."
+  },
   ALERT_POPUP_SUCCESSFUL: {
     name: "ALERT_POPUP_SUCCESSFUL",
     type: "alert",

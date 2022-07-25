@@ -40,7 +40,7 @@ const App = () => {
   const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [alertSetting, setAlertSetting] = useState(
-    formSettingStates.ALERT_POPUP_FAILED
+    formSettingStates.ALERT_POPUP_LOADING
   );
   const [cards, setCards] = useState(loadingInitState.card);
   const [currentUser, setCurrentUser] = useState(loadingInitState.useInfo);

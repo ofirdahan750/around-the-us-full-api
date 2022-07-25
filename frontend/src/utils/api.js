@@ -1,8 +1,7 @@
-import apiConfing from "./config.js";
 class Api {
   constructor() {
     this._token = localStorage.getItem("jwt");
-    this._baseUrl = apiConfing.baseUrl;
+    this._baseUrl = "https://api.ofir1003.students.nomoredomainssbs.ru";
   }
   _onHttpRequest = async (url, method, data) => {
     const res = await fetch(`${this._baseUrl}/${url}`, {

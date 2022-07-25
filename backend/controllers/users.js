@@ -38,7 +38,11 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((finalData) => res.send({ user: finalData }))
+    .then((finalData) => {
+      const dataCopyNoPass = finalData;
+      dataCopyNoPass.password = '';
+      res.send({ dataCopyNoPass });
+    })
     .catch((err) => {
       next(err);
     });

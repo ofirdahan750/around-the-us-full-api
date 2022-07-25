@@ -35,7 +35,7 @@ cardSchema.statics.authAndDelete = function authAndDelete({
   reqUserId,
   ownerId,
 }) {
-  if (reqUserId === ownerId) {
+  if (reqUserId === ownerId.toString()) {
     return this.deleteOne({ _id: cardId }).orFail(() => {
       throw new ErrorHandler(404, `No card found with ${cardId}`);
     });

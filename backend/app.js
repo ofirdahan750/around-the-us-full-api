@@ -26,10 +26,10 @@ const limiter = rateLimit({
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
 
+app.use(limiter);
 app.use(requestLogger);
 app.use(express.json());
 app.use(helmet());
-app.use(limiter);
 app.use(cors());
 app.options('*', cors());
 
