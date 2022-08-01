@@ -39,8 +39,8 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((finalData) => {
-      const dataCopyNoPass = finalData;
-      dataCopyNoPass.password = '';
+      const dataCopyNoPass = finalData.toObject();
+      delete dataCopyNoPass.password
       res.send({ dataCopyNoPass });
     })
     .catch((err) => {
@@ -50,6 +50,8 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  console.log('password:', password)
+  console.log('email:', email)
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(

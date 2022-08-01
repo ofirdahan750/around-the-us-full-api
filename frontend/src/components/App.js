@@ -110,25 +110,26 @@ const App = () => {
   );
   useEffect(() => {
     //Getting AUTH form html text and setting
-    if (location.pathname === "/signin") {
-      setFormSetting(formSettingStates.LOG_IN_FROM);
-    }
-    if (location.pathname === "/signup") {
-      setFormSetting(formSettingStates.SIGN_IN_FROM);
+    if (!isLoggedIn) {
+      if (location.pathname === "/signin") {
+        setFormSetting(formSettingStates.LOG_IN_FROM);
+      }
+      if (location.pathname === "/signup") {
+        setFormSetting(formSettingStates.SIGN_IN_FROM);
+      }
     }
   }, [location.pathname]);
   const onInit = () => {
+    setCurrentUser(loadingInitState.useInfo);
+    setCards(loadingInitState.card);
     const jwt = localStorage.getItem("jwt") || false;
     if (jwt) {
-      setCurrentUser(loadingInitState.useInfo);
-      setCards(loadingInitState.card);
       validateToken(jwt)
         .then((userRes) => {
           navigate("/");
           setCurrentUser(userRes);
           setIsLoggedIn(true);
           setIsLoading(true);
-          // debugger
           api
             .getInitialCards()
             .then((cardItemsArr) => {
