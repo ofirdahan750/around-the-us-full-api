@@ -10,7 +10,7 @@
     "lintfix": "npm run lint -- --fix",
     "cleandev": "rm -rf node_modules && npm i && npm run dev ",
     "gitpush": "git add . ; git commit -m 'fix' ; git push",
-    "deploy": "rm -rf node_modules && scp -r ./* ofirdahan1003@ofir1003.students.nomoredomainssbs.ru:/home/ofirdahan1003/around-express && npm i"
+    "deploy": "npm run lintfix && rm -rf node_modules && scp -r ./* ofirdahan1003@ofir1003.students.nomoredomainssbs.ru:/home/ofirdahan1003/around-express && npm i"
   },
   "repository": {
     "type": "git",
