@@ -50,8 +50,6 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log('password:', password);
-  console.log('email:', email);
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
