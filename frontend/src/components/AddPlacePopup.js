@@ -42,6 +42,7 @@ const AddPlacePopup = ({
         }}
         type="text"
         placeholder="Title"
+        name="img_name"
         value={imgTitle || ""}
         minLength="1"
         maxLength="30"
@@ -54,6 +55,7 @@ const AddPlacePopup = ({
         className="popup-box__input popup-box__input_order_second-input"
         type="url"
         value={imgSrc || ""}
+        name="img_url"
         onChange={(e) => {
           setImgSrc(e.target.value);
           onSetVaildMsg("urlInput", e.target.validationMessage);

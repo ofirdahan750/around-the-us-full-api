@@ -79,7 +79,7 @@ const App = () => {
 
   useEffect(() => {
     //Init only
-    navigate("/");
+    // navigate("/");
     onInit();
   }, []);
 
@@ -120,21 +120,20 @@ const App = () => {
     }
   }, [location.pathname]);
   const onInit = () => {
-    setCurrentUser(loadingInitState.useInfo);
-    setCards(loadingInitState.card);
+    setIsLoading(true);
     const jwt = localStorage.getItem("jwt") || false;
     if (jwt) {
       validateToken(jwt)
-        .then((userRes) => {
+      .then((userRes) => {
+          setCurrentUser(loadingInitState.useInfo);
+          setCards(loadingInitState.card);
           navigate("/");
           setCurrentUser(userRes);
           setIsLoggedIn(true);
-          setIsLoading(true);
           api
             .getInitialCards()
             .then((cardItemsArr) => {
               setCards(cardItemsArr);
-              setIsLoading(false);
             })
             .catch((err) => {
               console.log("error:", err);
@@ -147,11 +146,18 @@ const App = () => {
           console.log(`Error: ${err}`);
           handleLogOutclicked();
           onHandleBtnText("Log in", true, err);
-        });
+        })
+        .finally(()=>{
+    setIsLoading(false);
+        })
+
     } else {
       setIsLoggedIn(false);
       navigate("/signin");
+    setIsLoading(false);
+      
     }
+
   };
   const handleEditProfileClick = () => {
     if (isLoading) return;
@@ -424,7 +430,7 @@ const App = () => {
           <Route
             path="/"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={isLoggedIn} isLoading={isLoading}>
                 <Main
                   currentUser={currentUser}
                   cards={cards}
